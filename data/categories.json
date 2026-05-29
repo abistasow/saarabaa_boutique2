@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "فساتين",
+    "name_fr": "Robes",
+    "image": "https://picsum.photos/id/30/400/300"
+  },
+  {
+    "id": 2,
+    "name": "حقائب",
+    "name_fr": "Sacs",
+    "image": "https://picsum.photos/id/27/400/300"
+  },
+  {
+    "id": 3,
+    "name": "إكسسوارات",
+    "name_fr": "Accessoires",
+    "image": "https://picsum.photos/id/36/400/300"
+  },
+  {
+    "id": 4,
+    "name": "أحذية",
+    "name_fr": "Chaussures",
+    "image": "https://picsum.photos/id/21/400/300"
+  }
+]

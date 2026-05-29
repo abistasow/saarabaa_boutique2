@@ -1,0 +1,98 @@
+[
+  {
+    "id": "POS178001435031",
+    "invoice": "INV-16543",
+    "customerName": "AMADOU",
+    "customerPhone": "768777783",
+    "items": [
+      {
+        "id": 103,
+        "name": "بلوزة حرير",
+        "name_fr": "Chemisier en soie",
+        "price": 180,
+        "quantity": 1
+      },
+      {
+        "id": 101,
+        "name": "فستان كوكتيل أنيق",
+        "name_fr": "Robe cocktail élégante",
+        "price": 350,
+        "quantity": 1
+      }
+    ],
+    "total": 530,
+    "date": "2026-05-29 03:25:50",
+    "status": "دين",
+    "payment": "دين",
+    "debtPaid": 0,
+    "debtRemaining": 530,
+    "debtPayments": []
+  },
+  {
+    "id": "ORD1780012064611",
+    "invoice": "INV-28270",
+    "customerName": "mousaz",
+    "customerPhone": "21524335",
+    "customerAddress": "kjchcukv",
+    "items": [
+      {
+        "id": 107,
+        "name": "عقد لؤلؤ",
+        "name_fr": "Collier de perles",
+        "price": 450,
+        "quantity": 1
+      }
+    ],
+    "total": 450,
+    "date": "2026-05-29 02:47:44",
+    "status": "جديد",
+    "payment": "نقدي",
+    "debtPaid": 0,
+    "debtRemaining": 0,
+    "debtPayments": []
+  },
+  {
+    "id": "POS178001169216",
+    "invoice": "INV-23619",
+    "customerName": "AMADOU",
+    "customerPhone": "12546879",
+    "items": [
+      {
+        "id": 108,
+        "name": "حقيبة ظهر عصرية",
+        "name_fr": "Sac à dos moderne",
+        "price": 190,
+        "quantity": 1
+      }
+    ],
+    "total": 190,
+    "date": "2026-05-29 02:41:32",
+    "status": "مكتمل",
+    "payment": "نقدي",
+    "debtPaid": 0,
+    "debtRemaining": 0,
+    "debtPayments": []
+  },
+  {
+    "id": "POS178001164836",
+    "invoice": "INV-26042",
+    "customerName": "AMADOU",
+    "customerPhone": "768565545",
+    "items": [
+      {
+        "id": 108,
+        "name": "حقيبة ظهر عصرية",
+        "name_fr": "Sac à dos moderne",
+        "price": 190,
+        "quantity": 1
+      }
+    ],
+    "total": 190,
+    "date": "2026-05-29 02:40:48",
+    "status": "مكتمل",
+    "payment": "نقدي",
+    "debtPaid": 0,
+    "debtRemaining": 0,
+    "debtPayments": []
+  }
+]

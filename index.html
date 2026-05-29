@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-tag">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>saarabaa_boutique - متجر إلكتروني</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="top-bar-content">
+
+        <span><i class="fas fa-phone"></i> 221763809805</span>
+    </div>
+</div>
+
+<!-- Navbar -->
+<header class="navbar" id="navbar">
+    <a class="logo" href="#" id="nav-home">
+        <img id="logo-img" src="/uploads/logos.png" alt="saarabaa_boutique" style="height:45px;border-radius:10px;">
+    </a>
+    <div class="nav-links">
+        <button class="nav-btn nav-link" data-view="home"><i class="fas fa-home"></i> <span data-i18n="home">الرئيسية</span></button>
+        <button class="nav-btn nav-link" data-view="products"><i class="fas fa-store"></i> <span data-i18n="store">المتجر</span></button>
+        <button class="nav-btn nav-link" data-view="pos"><i class="fas fa-cash-register"></i> <span data-i18n="cashier">الكاشير</span></button>
+        <button class="nav-btn nav-link" data-view="orders"><i class="fas fa-truck"></i> <span data-i18n="myOrders">طلباتي</span></button>
+        <button class="nav-btn nav-link" data-view="admin"><i class="fas fa-cog"></i> <span data-i18n="admin">الإدارة</span></button>
+    </div>
+    <div class="nav-actions">
+        <button class="nav-btn" id="nav-cart-btn" style="position:relative;">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+        <div class="lang-selector">
+            <button class="nav-btn" id="lang-btn" onclick="toggleLangMenu()"><i class="fas fa-globe"></i> <span id="lang-current">FR</span></button>
+            <div class="lang-menu" id="lang-menu">
+                <button onclick="switchLang('ar')" class="lang-option">🇸🇦 العربية</button>
+                <button onclick="switchLang('fr')" class="lang-option">🇫🇷 Français</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container" id="app-root"></div>
+
+<!-- Cart Drawer -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+    <div class="drawer-header">
+        <h3><i class="fas fa-shopping-bag"></i> <span data-i18n="cart">سلة التسوق</span></h3>
+        <button class="btn-close" id="drawer-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+        <div class="empty-state"><span data-i18n="cartEmpty">🛒 السلة فارغة</span></div>
+    </div>
+    <div class="drawer-footer" id="drawer-footer">
+        <div class="drawer-total"><span data-i18n="total">المجموع</span><span id="drawer-total">0 XOF</span></div>
+        <button class="btn btn-primary btn-block" id="drawer-checkout"><span data-i18n="checkout">إتمام الطلب</span></button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div><h4>saarabaa_boutique</h4><p data-i18n="footerDesc">متجر إلكتروني للأزياء والإكسسوارات الفاخرة.</p></div>
+        <div><h4><span data-i18n="quickLinks">روابط سريعة</span></h4><p><a href="#" class="nav-link" data-view="home"><span data-i18n="home">الرئيسية</span></a><br><a href="#" class="nav-link" data-view="products"><span data-i18n="store">المتجر</span></a><br><a href="#" class="nav-link" data-view="orders"><span data-i18n="myOrders">طلباتي</span></a></p></div>
+        <div><h4><span data-i18n="contactUs">تواصل معنا</span></h4><p>هاتف: 221763809805<br>بريد: bayelo011@gmail.com</p>
+    </div>
+    <div class="footer-bottom">© 2025 saarabaa_boutique</div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
