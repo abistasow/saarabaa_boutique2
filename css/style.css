@@ -248,7 +248,7 @@ table .btn-sm { font-size:0.75rem; padding:0.25rem 0.5rem; }
     .hero { flex-direction:column; text-align:center; padding:1.5rem; }
     .hero-title { font-size:1.6rem; }
     .hero-img { width:150px; height:150px; }
-    .navbar { flex-direction:column; gap:0.5rem; padding:0.5rem 1rem; }
+    .navbar { flex-direction:column; gap:0.5rem; padding:0.5rem 1rem; position:relative; top:auto; }
     .nav-links { display:none; flex-direction:column; width:100%; gap:0.2rem; padding:0.5rem 0; }
     .nav-links.nav-open { display:flex; }
     .nav-links .nav-btn { width:100%; border-radius:10px; padding:0.6rem 1rem; }
