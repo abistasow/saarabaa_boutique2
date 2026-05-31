@@ -532,8 +532,8 @@ function showInvoice(order) {
         </tbody></table>
         <div style="font-size:1.3rem;font-weight:800;text-align:left;margin:1rem 0;">${t('total')}: ${order.total} XOF</div>
         <div style="display:flex;gap:0.5rem;">
-            <button class="btn btn-primary" onclick="printInvoice(${JSON.stringify(order).replace(/'/g,"&#39;")})"><i class="fas fa-print"></i> ${t('print')}</button>
-            <button class="btn btn-success" onclick="downloadPDF(${JSON.stringify(order).replace(/'/g,"&#39;")})"><i class="fas fa-file-pdf"></i> PDF</button>
+            <button class="btn btn-primary" onclick='printInvoice(${JSON.stringify(order).replace(/'/g,"&#39;")})'><i class="fas fa-print"></i> ${t('print')}</button>
+            <button class="btn btn-success" onclick='downloadPDF(${JSON.stringify(order).replace(/'/g,"&#39;")})'><i class="fas fa-file-pdf"></i> PDF</button>
             <button class="btn" onclick="this.closest('.modal-overlay').remove()">${t('close')}</button>
         </div>
     </div>`;
@@ -938,7 +938,7 @@ async function adminDebts() {
         <td style="font-weight:800;color:${(o.debtRemaining||o.total)>0?'#b34a4a':'#2a8a2a'};">${o.debtRemaining||o.total} XOF</td>
         <td>${o.date}</td>
         <td>
-            <button class="btn btn-sm" onclick="showInvoice(${JSON.stringify(o).replace(/'/g,"&#39;")})"><i class="fas fa-eye"></i></button>
+            <button class="btn btn-sm" onclick='showInvoice(${JSON.stringify(o).replace(/'/g,"&#39;")})'><i class="fas fa-eye"></i></button>
             ${(o.debtRemaining||o.total) > 0 ? `<button class="btn btn-sm btn-success" onclick="showDebtPayment('${o.id}')"><i class="fas fa-money-bill"></i> ${t('collect')}</button>` : ''}
         </td>
     </tr>`).join('')}
