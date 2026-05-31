@@ -234,7 +234,7 @@ def api():
     # ========== ADMIN ==========
     elif action == 'adminLogin':
         data = request.json
-        if data.get('password') == 'admin123':
+        if data.get('password') == 'adminlo1012':
             session['admin'] = True
             return jsonify({'success': True})
         return jsonify({'success': False})
