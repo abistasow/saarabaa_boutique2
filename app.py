@@ -5,11 +5,13 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24).hex()
 
 DATA_DIR = 'data'
-UPLOADS_DIR = 'uploads'
+UPLOADS_DIR = os.path.join('/tmp', 'uploads') if os.environ.get('VERCEL_ENV') else 'uploads'
 ALLOWED_EXT = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
 ON_VERCEL = os.environ.get('VERCEL_ENV', '') != ''
 DB_PATH = os.path.join('/tmp', 'data.db') if ON_VERCEL else os.path.join(DATA_DIR, 'data.db')
+
+os.makedirs(UPLOADS_DIR, exist_ok=True)
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
@@ -404,7 +406,9 @@ def api():
 
 @app.route('/uploads/<path:f>')
 def uploaded_file(f):
-    return send_from_directory(UPLOADS_DIR, f)
+    if os.path.exists(os.path.join(UPLOADS_DIR, f)):
+        return send_from_directory(UPLOADS_DIR, f)
+    return send_from_directory('uploads', f)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
