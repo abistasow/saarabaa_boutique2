@@ -92,6 +92,7 @@ function toggleLangMenu() {
 }
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.lang-selector')) document.getElementById('lang-menu')?.classList.remove('open');
+  if (!e.target.closest('.nav-links') && !e.target.closest('#hamburger-btn') && !e.target.closest('.hamburger')) document.querySelector('.nav-links')?.classList.remove('nav-open');
 });
 function switchLang(l) {
   lang = l; localStorage.setItem('lang', l);
@@ -190,13 +191,24 @@ async function renderProducts() {
             <label><input type="radio" name="sort" value="name" ${sort==='name'?'checked':''} onchange="filterProducts('sort','name')"> ${t('sortName')}</label>
         </div>
         <div class="products-main">
-            <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
-                <input id="prod-search" placeholder="${t('searchPlaceholder')}" style="flex:1;padding:0.6rem 1rem;border:2px solid #e6dbcf;border-radius:12px;">
-                <button class="btn" onclick="filterProducts('q',document.getElementById('prod-search').value)"><i class="fas fa-search"></i></button>
+            <div class="prod-toolbar">
+                <button class="btn btn-sm btn-outline filter-toggle" onclick="toggleFilter()"><i class="fas fa-sliders-h"></i> <span>${t('categories')}</span></button>
+                <div style="display:flex;gap:0.5rem;flex:1;">
+                    <input id="prod-search" placeholder="${t('searchPlaceholder')}" style="flex:1;padding:0.6rem 1rem;border:2px solid #e6dbcf;border-radius:12px;">
+                    <button class="btn" onclick="filterProducts('q',document.getElementById('prod-search').value)"><i class="fas fa-search"></i></button>
+                </div>
             </div>
             <div class="prod-grid">${(data.products||[]).map(p => prodCard(p)).join('')||`<div class="empty-state" style="grid-column:1/-1">${t('noProducts')}</div>`}</div>
         </div>
     </div>`;
+}
+
+function toggleFilter() {
+    document.querySelector('.filter-sidebar')?.classList.toggle('filter-open');
+}
+
+function toggleNav() {
+    document.querySelector('.nav-links')?.classList.toggle('nav-open');
 }
 
 function filterProducts(key, val) {
@@ -651,12 +663,12 @@ async function adminProducts() {
     const d = await api('adminProducts');
     const ps = d.products || [];
     return `<div style="margin-bottom:1rem;"><button class="btn btn-primary" onclick="adminProdForm()"><i class="fas fa-plus"></i> ${t('addProduct')}</button></div>
-    <table><thead><tr><th>${t('image')}</th><th>${t('name')}</th><th>${t('categories')}</th><th>${t('price')}</th><th>${t('stock')}</th><th>${t('actions')}</th></tr></thead><tbody>
+    <div class="table-wrap"><table><thead><tr><th>${t('image')}</th><th>${t('name')}</th><th>${t('categories')}</th><th>${t('price')}</th><th>${t('stock')}</th><th>${t('actions')}</th></tr></thead><tbody>
     ${ps.map(p => `<tr><td><img src="${p.image}" width="40" height="40" style="border-radius:8px;object-fit:cover;"></td>
     <td>${l10n(p,'name')}</td><td>${p.catId||'-'}</td><td>${p.price} XOF</td><td>${p.stock}</td>
     <td><button class="btn btn-sm" onclick="adminProdForm(${p.id})"><i class="fas fa-edit"></i></button>
     <button class="btn btn-sm btn-danger" onclick="adminDelProd(${p.id})"><i class="fas fa-trash"></i></button></td></tr>`).join('')}
-    </tbody></table>`;
+    </tbody></table></div>`;
 }
 
 async function adminProdForm(id) {
@@ -868,11 +880,11 @@ async function adminDelProd(id) {
 async function adminCategories() {
     const cats = (await api('adminCategories')).categories || [];
     return `<div style="margin-bottom:1rem;"><button class="btn btn-primary" onclick="adminCatForm()"><i class="fas fa-plus"></i> ${t('addCategory')}</button></div>
-    <table><thead><tr><th>${t('image')}</th><th>${t('name')}</th><th>${t('actions')}</th></tr></thead><tbody>
+    <div class="table-wrap"><table><thead><tr><th>${t('image')}</th><th>${t('name')}</th><th>${t('actions')}</th></tr></thead><tbody>
     ${cats.map(c => `<tr><td><img src="${c.image}" width="40" height="40" style="border-radius:8px;object-fit:cover;"></td>
     <td>${l10n(c,'name')}</td><td><button class="btn btn-sm" onclick="adminCatForm(${c.id})"><i class="fas fa-edit"></i></button>
     <button class="btn btn-sm btn-danger" onclick="adminDelCat(${c.id})"><i class="fas fa-trash"></i></button></td></tr>`).join('')}
-    </tbody></table>`;
+    </tbody></table></div>`;
 }
 
 async function adminDelCat(id) {
@@ -890,7 +902,7 @@ async function adminOrders() {
         <button class="btn btn-sm ${adminOrderFilter==='مكتمل'?'btn-primary':'btn-outline'}" onclick="adminOrderFilter='${lang==='fr'?'Terminé':'مكتمل'}';render()">${t('statusCompleted')}</button>
         <button class="btn btn-sm ${adminOrderFilter==='ملغي'?'btn-primary':'btn-outline'}" onclick="adminOrderFilter='${lang==='fr'?'Annulé':'ملغي'}';render()">${t('statusCancelled')}</button>
     </div>
-    <table><thead><tr><th>${t('invoiceNum')}</th><th>${t('client')}</th><th>${t('total')}</th><th>${t('date')}</th><th>${t('statusNew')}</th><th>${t('actions')}</th></tr></thead><tbody>
+    <div class="table-wrap"><table><thead><tr><th>${t('invoiceNum')}</th><th>${t('client')}</th><th>${t('total')}</th><th>${t('date')}</th><th>${t('statusNew')}</th><th>${t('actions')}</th></tr></thead><tbody>
     ${os.map(o => `<tr><td>${o.invoice||o.id}</td><td>${o.customerName}</td><td>${o.total} XOF</td><td>${o.date}</td>
     <td><span class="tag ${statusClass(o.status)}">${statusLabel(o.status)}</span></td>
     <td><button class="btn btn-sm" onclick='showInvoice(${JSON.stringify(o).replace(/'/g,"&#39;")})'><i class="fas fa-eye"></i></button>
@@ -898,7 +910,7 @@ async function adminOrders() {
         <option value="">${lang==='fr'?'Mettre à jour':'تحديث'}</option><option value="${lang==='fr'?'Nouveau':'جديد'}">${t('statusNew')}</option><option value="${lang==='fr'?'En cours':'قيد التجهيز'}">${t('statusProcessing')}</option>
         <option value="${lang==='fr'?'Terminé':'مكتمل'}">${t('statusCompleted')}</option><option value="${lang==='fr'?'Annulé':'ملغي'}">${t('statusCancelled')}</option>
     </select></td></tr>`).join('')}
-    </tbody></table>`;
+    </tbody></table></div>`;
 }
 
 async function adminUpdStatus(id, status) {
@@ -916,7 +928,7 @@ async function adminDebts() {
         <div class="stat-card"><div class="stat-num">${debts.length}</div><div class="stat-label">${t('debtOrders')}</div></div>
     </div>`;
     if (!debts.length) return html + `<div class="empty-state">${t('noOrders')}</div>`;
-    html += `<table><thead><tr><th>${t('invoiceNum')}</th><th>${t('client')}</th><th>${t('phone')}</th><th>${t('total')}</th><th>${t('paid')}</th><th>${t('remaining')}</th><th>${t('date')}</th><th>${t('actions')}</th></tr></thead><tbody>
+    html += `<div class="table-wrap"><table><thead><tr><th>${t('invoiceNum')}</th><th>${t('client')}</th><th>${t('phone')}</th><th>${t('total')}</th><th>${t('paid')}</th><th>${t('remaining')}</th><th>${t('date')}</th><th>${t('actions')}</th></tr></thead><tbody>
     ${debts.map(o => `<tr>
         <td>${o.invoice||o.id}</td>
         <td>${o.customerName}</td>
@@ -930,7 +942,7 @@ async function adminDebts() {
             ${(o.debtRemaining||o.total) > 0 ? `<button class="btn btn-sm btn-success" onclick="showDebtPayment('${o.id}')"><i class="fas fa-money-bill"></i> ${t('collect')}</button>` : ''}
         </td>
     </tr>`).join('')}
-    </tbody></table>`;
+    </tbody></table></div>`;
     return html;
 }
 
@@ -967,9 +979,9 @@ async function adminReports() {
         <div class="stat-card"><div class="stat-num">${d?.completedOrders||0}</div><div class="stat-label">${t('completedOrders')}</div></div>
     </div>
     <h4>${t('topProducts')}</h4>
-    <table><thead><tr><th>#</th><th>${t('name')}</th><th>${t('quantity')}</th></tr></thead><tbody>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>${t('name')}</th><th>${t('quantity')}</th></tr></thead><tbody>
     ${(d?.topProducts||[]).map((tp,i) => `<tr><td>${i+1}</td><td>${tp.name}</td><td>${tp.count}</td></tr>`).join('')||'<tr><td colspan="3" class="text-center">-</td></tr>'}
-    </tbody></table>`;
+    </tbody></table></div>`;
 }
 
 // ========== RESET DATA ==========
@@ -1024,4 +1036,5 @@ if (hash && ['home','products','orders','pos','admin'].includes(hash)) currentVi
     document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active-nav'));
     const btn = document.querySelector(`.nav-link[data-view="${currentView}"]`);
     if (btn) btn.classList.add('active-nav');
+    document.getElementById('hamburger-btn')?.addEventListener('click', function(e) { e.stopPropagation(); toggleNav(); });
 })();
